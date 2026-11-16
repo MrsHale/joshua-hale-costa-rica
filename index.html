@@ -22,7 +22,7 @@
       <div class="bar" role="progressbar" aria-label="Fundraising progress" aria-valuemin="0" aria-valuemax="1200" aria-valuenow="0"><div class="fill" id="fill" style="width:0"></div></div>
       <div class="stats"><span id="count">0 of 45 squares given</span><span id="left">$1,200 to go</span></div>
     </section>
-  <section class="card">
+    <section class="card">
       <h2>Choose a giving square</h2>
       <p>Tap an open square to open Cash App or PayPal with that exact amount filled in. Review the recipient and amount, then confirm the payment there.</p>
       <ul class="grid" id="squares" aria-label="Giving amounts"></ul>
@@ -37,7 +37,26 @@
     </section>
     <section class="card give">
       <div>
-<script>
+        <h2>Give with Cash App</h2>
+        <p class="handle">$AmandaHale3</p>
+        <p class="muted">Cash App recipient: Amanda Hale. You can also send a gift directly using the button below.</p>
+        <a class="pay cash" href="https://cash.app/$AmandaHale3" target="_blank" rel="noopener noreferrer">Open Cash App</a>
+      </div>
+    </section>
+    <section class="card give">
+      <div>
+        <h2>Give with PayPal</h2>
+        <p class="handle">@amandaghale</p>
+        <p class="muted">PayPal recipient: Amanda Hale. You can also send a gift directly using the button below.</p>
+        <a class="pay cash" style="background:#0070ba" href="https://paypal.me/amandaghale" target="_blank" rel="noopener noreferrer">Open PayPal</a>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <p class="verse">“Here am I; send me.” · Isaiah 6:8</p>
+    <p class="muted">Thank you for your prayers and your support!</p>
+  </footer>
+  <script>
     (function(){
       var amounts=[35,36,21,3,32,10,8,16,20,53,7,18,1,19,11,60,22,15,30,12,42,2,4,23,25,13,14,37,44,49,39,38,24,6,34,5,46,27,59,50,45,9,28,57,51];
       var given=new Set();
@@ -60,22 +79,6 @@
         });
         li.appendChild(button);
         list.appendChild(li);
-      });
-    })();
-  </script>
-      amounts.forEach(function(amount){
-        var li=document.createElement('li');
-        var button=document.createElement('button');
-        button.type='button';button.className='square';
-        button.setAttribute('aria-label',dollars(amount)+' giving square, open');
-        button.innerHTML='<span class="amount">'+dollars(amount)+'</span>';
-        button.addEventListener('click',function(){
-          document.getElementById('chosen').textContent='You chose the '+dollars(amount)+' square. Cash App will open with this amount filled in.';
-          document.getElementById('pay-link').href='https://cash.app/$AmandaHale3/'+amount;
-          panel.classList.add('open');
-          document.getElementById('pay-link').focus();
-        });
-        li.appendChild(button);list.appendChild(li);
       });
     })();
   </script>
