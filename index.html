@@ -22,28 +22,47 @@
       <div class="bar" role="progressbar" aria-label="Fundraising progress" aria-valuemin="0" aria-valuemax="1200" aria-valuenow="0"><div class="fill" id="fill" style="width:0"></div></div>
       <div class="stats"><span id="count">0 of 45 squares given</span><span id="left">$1,200 to go</span></div>
     </section>
-    <section class="card">
+  <section class="card">
       <h2>Choose a giving square</h2>
-      <p>Tap an open square to open Cash App with that exact amount filled in. Review the recipient and amount in Cash App, then confirm the payment there.</p>
+      <p>Tap an open square to open Cash App or PayPal with that exact amount filled in. Review the recipient and amount, then confirm the payment there.</p>
       <ul class="grid" id="squares" aria-label="Giving amounts"></ul>
       <p class="notice">A square is only marked given after the gift is received. Clicking a square does not send a payment.</p>
       <div class="pay-panel" id="pay-panel" aria-live="polite">
         <p id="chosen"></p>
-        <a class="pay" id="pay-link" href="https://cash.app/$AmandaHale3" target="_blank" rel="noopener noreferrer">Continue to Cash App</a>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <a class="pay" id="pay-link" href="https://cash.app/$AmandaHale3" target="_blank" rel="noopener noreferrer">Continue to Cash App</a>
+          <a class="pay" id="paypal-link" style="background:#0070ba" href="https://paypal.me/amandaghale" target="_blank" rel="noopener noreferrer">Continue to PayPal</a>
+        </div>
       </div>
     </section>
     <section class="card give">
-      <div><h2>Give with Cash App</h2><p class="handle">$AmandaHale3</p><p class="muted">Cash App recipient: Amanda Hale. You can also send a gift directly using the button below.</p><a class="pay cash" href="https://cash.app/$AmandaHale3" target="_blank" rel="noopener noreferrer">Open Cash App</a></div>
-    </section>
-    <footer><p class="verse">“Here am I; send me.” · Isaiah 6:8</p><p>Thank you for your prayers and your support!</p></footer>
-  </main>
-  <script>
+      <div>
+<script>
     (function(){
       var amounts=[35,36,21,3,32,10,8,16,20,53,7,18,1,19,11,60,22,15,30,12,42,2,4,23,25,13,14,37,44,49,39,38,24,6,34,5,46,27,59,50,45,9,28,57,51];
       var given=new Set();
       var list=document.getElementById('squares');
       var panel=document.getElementById('pay-panel');
       function dollars(n){return '$'+Number(n).toLocaleString('en-US')}
+      amounts.forEach(function(amount){
+        var li=document.createElement('li');
+        var button=document.createElement('button');
+        button.type='button';
+        button.className='square';
+        button.setAttribute('aria-label',dollars(amount)+' giving square, open');
+        button.innerHTML='<span class="amount">'+dollars(amount)+'</span>';
+        button.addEventListener('click',function(){
+          document.getElementById('chosen').textContent='You chose the '+dollars(amount)+' square. Choose Cash App or PayPal below to open with this amount filled in.';
+          document.getElementById('pay-link').href='https://cash.app/$AmandaHale3/'+amount;
+          document.getElementById('paypal-link').href='https://paypal.me/amandaghale/'+amount;
+          panel.classList.add('open');
+          document.getElementById('pay-link').focus();
+        });
+        li.appendChild(button);
+        list.appendChild(li);
+      });
+    })();
+  </script>
       amounts.forEach(function(amount){
         var li=document.createElement('li');
         var button=document.createElement('button');
